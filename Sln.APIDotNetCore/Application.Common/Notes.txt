@@ -1,0 +1,8 @@
+﻿
+Install-Package Microsoft.AspNetCore.Authentication.JwtBearer -Version 2.2.0
+Install-Package Microsoft.Extensions.Configuration -Version 2.2.0
+Install-Package Microsoft.Extensions.DependencyInjection -Version 2.2.0
+Install-Package Microsoft.Extensions.DependencyInjection.Abstractions -Version 2.2.0
+Install-Package Microsoft.AspNet.WebApi.Cors -Version 5.2.7
+
+Install-Package Microsoft.IdentityModel.Tokens -Version 5.5.0

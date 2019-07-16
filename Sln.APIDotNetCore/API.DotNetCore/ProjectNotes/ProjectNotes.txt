@@ -1,0 +1,54 @@
+﻿
+
+https://localhost:44387/api/v1/PersonalInfoes
+
+Collection: https://www.getpostman.com/collections/c9ed33e885ea7e6a6c08
+
+
+Install-Package Microsoft.EntityFrameworkCore -Version 2.2.4
+Install-Package Microsoft.EntityFrameworkCore -Version 2.2.0
+
+
+Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 2.1.4
+Install-Package Microsoft.EntityFrameworkCore.Tools -Version 2.1.4
+
+
+01. Enable CORS
+
+Install-Package Microsoft.Extensions.Logging -Version 2.2.0
+Install-Package Microsoft.Extensions.Logging -Version 2.1.1
+
+JWT:
+Install-Package JWT -Version 4.0.0
+
+JWT details:
+https://code-maze.com/authentication-aspnetcore-jwt-1/
+
+
+
+Collection:
+https://www.getpostman.com/collections/c9ed33e885ea7e6a6c08
+https://www.getpostman.com/collections/c9ed33e885ea7e6a6c08
+
+OK => returns the 200 status code
+NotFound => returns the 404 status code
+BadRequest => returns the 400 status code
+NoContent => returns the 204 status code
+Created, CreatedAtRoute, CreatedAtAction => returns the 201 status code
+Unauthorized => returns the 401 status code
+Forbid => returns the 403 status code
+
+
+EF: Migration
+Add-Migration InitialCreate
+Update-Database
+
+
+CMD: 
+Add-Migration
+Drop-Database
+Get-DbContext
+Scaffold-DbContext
+Script-Migrations
+Update-Database
+

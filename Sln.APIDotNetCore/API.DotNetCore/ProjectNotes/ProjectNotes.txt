@@ -12,6 +12,7 @@ Install-Package Microsoft.EntityFrameworkCore -Version 2.2.0
 Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 2.1.4
 Install-Package Microsoft.EntityFrameworkCore.Tools -Version 2.1.4
 
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 2.2.0
 
 01. Enable CORS
 
@@ -52,3 +53,15 @@ Scaffold-DbContext
 Script-Migrations
 Update-Database
 
+
+Add Docker:
+dotnet publish -o ./publish 
+docker pull mcr.microsoft.com/dotnet/core/aspnet:2.2
+
+https://medium.com/@alcalawilfre/asp-net-core-with-docker-a-beginers-guide-4f490f644a89
+
+docker build -t apicoreimage .
+docker run -p 5001:80 apicoreimage
+
+Run from publish file:
+dotnet API.DotNetCore.dll

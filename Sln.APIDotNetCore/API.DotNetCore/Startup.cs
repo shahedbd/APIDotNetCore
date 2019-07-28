@@ -1,6 +1,7 @@
-﻿using Application.Common;
+﻿using API.DotNetCore.JWTAuths;
 using Application.EntityFrameworkCore;
 using Application.Repository;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -26,13 +27,13 @@ namespace API.DotNetCore
             services.AddDbContext<DataBaseContext>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IBaseRepository, BaseRepository<DataBaseContext>>();
 
-
-            //services.ConfigureCORS();
-            services.ConfigureJWT(Configuration);
-
-            // Add application services.
             services.AddTransient<IAuth, Auth>();
 
+            services.ConfigureCORS();
+            services.ConfigureJWT(Configuration);
+            services.ConfigureIdentity();
+
+            services.AddAutoMapper(typeof(Startup));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

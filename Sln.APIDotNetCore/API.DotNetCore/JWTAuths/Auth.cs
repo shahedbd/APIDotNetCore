@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text;
 
-namespace Application.Common
+namespace API.DotNetCore.JWTAuths
 {
     public class Auth : IAuth
     {
@@ -43,5 +44,16 @@ namespace Application.Common
                 return Convert.ToBase64String(randomNumber);
             }
         }
+
+
+        public ClaimsIdentity GenerateClaimsIdentity(string userName, string id)
+        {
+            return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
+            {
+                new Claim(Constants.Strings.JwtClaimIdentifiers.Id, id),
+                new Claim(Constants.Strings.JwtClaimIdentifiers.Rol, _config["Jwt:Key"])
+            });
+        }
+
     }
 }

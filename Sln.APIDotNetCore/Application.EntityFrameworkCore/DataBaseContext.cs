@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.EntityFrameworkCore
 {
-    public class DataBaseContext : IdentityDbContext
+    public class DataBaseContext : IdentityDbContext<AppUser>
     {
-        public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options) { }
+        public DataBaseContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<PersonalInfo> PersonalInfo { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     }
 }

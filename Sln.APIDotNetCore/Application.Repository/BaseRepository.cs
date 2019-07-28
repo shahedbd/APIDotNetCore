@@ -44,7 +44,7 @@ namespace Application.Repository
             return t;
         }
 
-        public virtual async Task<T> AddAsyn<T>(T t) where T : class
+        public virtual async Task<T> AddAsync<T>(T t) where T : class
         {
             _dbContext.Set<T>().Add(t);
             await _dbContext.SaveChangesAsync();

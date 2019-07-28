@@ -9,7 +9,7 @@ namespace Application.Repository
     public interface IBaseRepository
     {
         T Add<T>(T t) where T : class;
-        Task<T> AddAsyn<T>(T t) where T : class;
+        Task<T> AddAsync<T>(T t) where T : class;
         int Count();
         Task<int> CountAsync();
         void Delete<T>(T entity) where T : class;

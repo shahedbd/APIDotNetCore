@@ -6,3 +6,10 @@ Install-Package Microsoft.Extensions.DependencyInjection.Abstractions -Version 2
 Install-Package Microsoft.AspNet.WebApi.Cors -Version 5.2.7
 
 Install-Package Microsoft.IdentityModel.Tokens -Version 5.5.0
+
+
+Install-Package FluentValidation -Version 8.4.0
+Install-Package FluentValidation.AspNetCore -Version 8.4.0
+
+
+

@@ -1,12 +1,14 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
-using API.DotNetCore.JWTAuths;
+﻿using API.DotNetCore.JWTAuths;
 using Application.Common.ViewModel;
-using Application.Core;
+using Application.Core.Identity;
 using Application.Repository;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 
 namespace API.DotNetCore.Controllers
@@ -36,37 +38,37 @@ namespace API.DotNetCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var identity = await GetClaimsIdentity(credentials.UserName, credentials.Password);
-            if (identity == null)
+            var identity = await GetIdentityUser(credentials.UserName, credentials.Password);
+            if (identity == false)
             {
                 return BadRequest("Invalid username or password.");
             }
 
-            int ExpireIn = 500;
-            var tokenString = _auth.GenerateJSONWebToken(ExpireIn);
-            var jwt = Ok(new { Token = tokenString, ExpireTime = ExpireIn * 60, RefreshToken = _auth.GenerateRefreshToken() });
-            return new OkObjectResult(jwt);
+            int ExpireIn = 5000;
+            if (identity == true)
+            {
+                var tokenString = _auth.GenerateJSONWebToken(ExpireIn);
+                HttpContext.Session.SetString("JWToken", tokenString);
+                return Ok(new { Token = tokenString, ExpireTime = ExpireIn * 60, RefreshToken = _auth.GenerateRefreshToken() });
+            }
+            else
+            {
+                return Unauthorized();
+            }
+
         }
 
-        private async Task<ClaimsIdentity> GetClaimsIdentity(string userName, string password)
+        private async Task<bool> GetIdentityUser(string userName, string password)
         {
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
-                return await Task.FromResult<ClaimsIdentity>(null);
+                return await Task.FromResult(false);
 
             // get the user to verifty
             var userToVerify = await _userManager.FindByNameAsync(userName);
-
-            if (userToVerify == null) return await Task.FromResult<ClaimsIdentity>(null);
-
-            // check the credentials
-            if (await _userManager.CheckPasswordAsync(userToVerify, password))
-            {
-                var result = _auth.GenerateClaimsIdentity(userName, userToVerify.Id);
-                return await Task.FromResult(result);
-            }
+            if (userToVerify == null) return await Task.FromResult(false);
 
             // Credentials are invalid, or account doesn't exist
-            return await Task.FromResult<ClaimsIdentity>(null);
+            return await Task.FromResult(true);
         }
     }
 }

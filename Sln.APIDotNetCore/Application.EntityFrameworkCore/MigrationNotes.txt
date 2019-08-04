@@ -1,0 +1,7 @@
+﻿
+
+
+EF: Migration
+Add-Migration InitialCreate
+Update-Database
+

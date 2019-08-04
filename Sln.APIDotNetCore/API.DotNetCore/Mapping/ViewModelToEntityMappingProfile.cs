@@ -1,5 +1,5 @@
 ﻿using Application.Common.ViewModel;
-using Application.Core;
+using Application.Core.Identity;
 using AutoMapper;
 
 namespace API.DotNetCore.Mapping

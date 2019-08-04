@@ -25,12 +25,12 @@ namespace API.DotNetCore
         {
             var connectionString = Configuration["ConnectionStrings:MSSQLConn"];
             services.AddDbContext<DataBaseContext>(options => options.UseSqlServer(connectionString));
-            services.AddScoped<IBaseRepository, BaseRepository<DataBaseContext>>();
-
-            services.AddTransient<IAuth, Auth>();
 
             services.ConfigureCORS();
             services.ConfigureJWT(Configuration);
+
+            services.AddScoped<IBaseRepository, BaseRepository<DataBaseContext>>();       
+            services.AddTransient<IAuth, Auth>();
             services.ConfigureIdentity();
 
             services.AddAutoMapper(typeof(Startup));

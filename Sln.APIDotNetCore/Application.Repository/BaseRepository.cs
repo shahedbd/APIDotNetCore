@@ -66,12 +66,14 @@ namespace Application.Repository
         {
             return _dbContext.Set<T>().Where(match).ToList();
         }
-
+        public async Task<ICollection<T>> FindAllAsync<T>() where T : class
+        {
+            return await _dbContext.Set<T>().ToListAsync();
+        }
         public async Task<ICollection<T>> FindAllAsync<T>(Expression<Func<T, bool>> match) where T : class
         {
             return await _dbContext.Set<T>().Where(match).ToListAsync();
         }
-
         public virtual void Delete<T>(T entity) where T : class
         {
             _dbContext.Set<T>().Remove(entity);
@@ -172,21 +174,6 @@ namespace Application.Repository
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        }
-
-        public int Count()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> CountAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task FindAllAsync<T>() where T : class
-        {
-            throw new NotImplementedException();
         }
     }
 }

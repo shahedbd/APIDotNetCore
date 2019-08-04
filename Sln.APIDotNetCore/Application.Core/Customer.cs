@@ -1,4 +1,4 @@
-
+using Application.Core.Identity;
 
 namespace Application.Core
 {

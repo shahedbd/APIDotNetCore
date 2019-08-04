@@ -1,5 +1,6 @@
 ﻿using Application.Core;
 using Application.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,7 +23,7 @@ namespace API.DotNetCore.Controllers
         }
 
         // GET: api/PersonalInfoes
-        [HttpGet]
+        [HttpGet, Authorize]
         public IEnumerable<PersonalInfo> GetPersonalInfo()
         {
             var result = _repository.GetAll<PersonalInfo>();

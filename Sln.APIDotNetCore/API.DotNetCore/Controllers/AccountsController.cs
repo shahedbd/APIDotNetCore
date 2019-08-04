@@ -1,5 +1,6 @@
 ﻿using Application.Common.ViewModel;
 using Application.Core;
+using Application.Core.Identity;
 using Application.Repository;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;

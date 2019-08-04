@@ -19,7 +19,28 @@ namespace Application.EntityFrameworkCore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Application.Core.AppUser", b =>
+            modelBuilder.Entity("Application.Core.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Gender");
+
+                    b.Property<string>("IdentityId");
+
+                    b.Property<string>("Locale");
+
+                    b.Property<string>("Location");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdentityId");
+
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("Application.Core.Identity.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -78,25 +99,41 @@ namespace Application.EntityFrameworkCore.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Application.Core.Customer", b =>
+            modelBuilder.Entity("Application.Core.PersonalInfo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Gender");
+                    b.Property<string>("City");
 
-                    b.Property<string>("IdentityId");
+                    b.Property<string>("Country");
 
-                    b.Property<string>("Locale");
+                    b.Property<DateTime?>("CreatedDate");
 
-                    b.Property<string>("Location");
+                    b.Property<string>("CreationUser");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime?>("DateOfBirth");
 
-                    b.HasIndex("IdentityId");
+                    b.Property<string>("Email");
 
-                    b.ToTable("Customers");
+                    b.Property<string>("FirstName");
+
+                    b.Property<DateTime?>("LastModifiedDate");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("LastUpdateUser");
+
+                    b.Property<string>("MobileNo");
+
+                    b.Property<string>("NID");
+
+                    b.Property<byte>("Status");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("PersonalInfo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -211,7 +248,7 @@ namespace Application.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Application.Core.Customer", b =>
                 {
-                    b.HasOne("Application.Core.AppUser", "Identity")
+                    b.HasOne("Application.Core.Identity.AppUser", "Identity")
                         .WithMany()
                         .HasForeignKey("IdentityId");
                 });
@@ -226,7 +263,7 @@ namespace Application.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Application.Core.AppUser")
+                    b.HasOne("Application.Core.Identity.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -234,7 +271,7 @@ namespace Application.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Application.Core.AppUser")
+                    b.HasOne("Application.Core.Identity.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -247,7 +284,7 @@ namespace Application.EntityFrameworkCore.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Application.Core.AppUser")
+                    b.HasOne("Application.Core.Identity.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -255,7 +292,7 @@ namespace Application.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Application.Core.AppUser")
+                    b.HasOne("Application.Core.Identity.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

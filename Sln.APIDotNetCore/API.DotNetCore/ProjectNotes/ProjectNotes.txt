@@ -95,7 +95,7 @@ https://fullstackmark.com/post/13/jwt-authentication-with-aspnet-core-2-web-api-
 
 
 Post-man:
-https://localhost:44387/api/Accounts
+http://localhost:5000/api/Accounts
 {
 	"email":"dev@gmail.com",
 	"password":"dew321",
@@ -105,7 +105,7 @@ https://localhost:44387/api/Accounts
 	"location":"Dhaka, Bangladesh"
 }
 
-https://localhost:44387/api/auth/login
+http://localhost:5000/api/auth/login
 {
 	"username":"dev2",
 	"password":"dew321"

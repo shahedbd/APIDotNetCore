@@ -29,7 +29,7 @@ namespace API.DotNetCore
             services.ConfigureCORS();
             services.ConfigureJWT(Configuration);
 
-            services.AddScoped<IBaseRepository, BaseRepository<DataBaseContext>>();       
+            services.AddTransient<IBaseRepository, BaseRepository<DataBaseContext>>();
             services.AddTransient<IAuth, Auth>();
             services.ConfigureIdentity();
 
@@ -50,6 +50,7 @@ namespace API.DotNetCore
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

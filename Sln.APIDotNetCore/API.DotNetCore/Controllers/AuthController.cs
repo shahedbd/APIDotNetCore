@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -20,13 +21,16 @@ namespace API.DotNetCore.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
         private readonly IAuth _auth;
+        private IConfiguration _config;
 
-        public AuthController(UserManager<AppUser> userManager, IMapper mapper, IBaseRepository repository, IAuth auth)
+
+        public AuthController(UserManager<AppUser> userManager, IMapper mapper, IBaseRepository repository, IAuth auth, IConfiguration config)
         {
             _repository = repository;
             _userManager = userManager;
             _mapper = mapper;
             _auth = auth;
+            _config = config;
         }
 
         // POST api/auth/login
@@ -44,12 +48,12 @@ namespace API.DotNetCore.Controllers
                 return BadRequest("Invalid username or password.");
             }
 
-            int ExpireIn = 5000;
+            int ExpireIn = Convert.ToInt16(_config["Jwt:expires"]);
             if (identity == true)
             {
                 var tokenString = _auth.GenerateJSONWebToken(ExpireIn);
-                HttpContext.Session.SetString("JWToken", tokenString);
-                return Ok(new { Token = tokenString, ExpireTime = ExpireIn * 60, RefreshToken = _auth.GenerateRefreshToken() });
+                // HttpContext.Session.SetString("JWToken", tokenString);
+                return Ok(new { Token = tokenString, ExpireTime = ExpireIn, RefreshToken = _auth.GenerateRefreshToken() });
             }
             else
             {

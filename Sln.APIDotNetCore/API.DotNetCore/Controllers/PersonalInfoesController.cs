@@ -32,7 +32,7 @@ namespace API.DotNetCore.Controllers
         }
 
         // GET: api/PersonalInfoes/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<IActionResult> GetPersonalInfo([FromRoute] long id)
         {
             if (!ModelState.IsValid)
@@ -51,7 +51,7 @@ namespace API.DotNetCore.Controllers
         }
 
         // PUT: api/PersonalInfoes/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize]
         public async Task<IActionResult> PutPersonalInfo([FromRoute] long id, [FromBody] PersonalInfo personalInfo)
         {
             return CreatedAtAction("GetPersonalInfo", new { id = personalInfo.ID }, personalInfo);
@@ -59,7 +59,7 @@ namespace API.DotNetCore.Controllers
         }
 
         // POST: api/PersonalInfoes
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<IActionResult> PostPersonalInfo([FromBody] PersonalInfo personalInfo)
         {
             try
@@ -78,7 +78,7 @@ namespace API.DotNetCore.Controllers
         }
 
         // DELETE: api/PersonalInfoes/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<IActionResult> DeletePersonalInfo([FromRoute] long id)
         {
             if (!ModelState.IsValid)

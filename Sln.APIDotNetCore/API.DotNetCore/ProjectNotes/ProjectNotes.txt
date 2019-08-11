@@ -101,7 +101,7 @@ http://localhost:5000/api/Accounts
 	"password":"dew321",
 	"firstname":"Azure",
 	"lastname":"Islam",
-	"username":"dev2",
+	"username":"dev",
 	"location":"Dhaka, Bangladesh"
 }
 

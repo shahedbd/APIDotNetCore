@@ -26,7 +26,7 @@ namespace API.DotNetCore.JWTAuths
                 issuer: _config["Jwt:issuer"],
                 audience: _config["Jwt:audience"],
                 claims: new List<Claim>(),
-                expires: DateTime.Now.AddHours(ExpireIn),
+                expires: DateTime.Now.AddMinutes(ExpireIn),
                 signingCredentials: signinCredentials
             );
 
